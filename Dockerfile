@@ -33,7 +33,7 @@ RUN chmod 777 /home/steam/run.sh \
  ## Always get the latest version of ark-server-tools
  && git clone -b $(git ls-remote --tags https://github.com/arkmanager/ark-server-tools.git | awk '{print $2}' | grep -v '{}' | awk -F"/" '{print $3}' | tail -n 1) --single-branch --depth 1 https://github.com/arkmanager/ark-server-tools.git /home/steam/ark-server-tools \
  && cd /home/steam/ark-server-tools/tools \
- && bash install.sh steam --bindir=/usr/bin \
+ && bash netinstall.sh steam --bindir=/usr/bin \
  && (crontab -l 2>/dev/null; echo "* 3 * * Mon yes | arkmanager upgrade-tools >> /ark/log/arkmanager-upgrade.log 2>&1") | crontab - \
  && mkdir /ark \
  && chown steam /ark && chmod 755 /ark \
