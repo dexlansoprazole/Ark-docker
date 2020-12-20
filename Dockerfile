@@ -39,7 +39,9 @@ RUN chmod 777 /home/steam/run.sh \
  && chown steam /ark && chmod 755 /ark \
  && mkdir /home/steam/steamcmd \
  && cd /home/steam/steamcmd \
- && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
+ && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf - \
+ && yum install-y epel-release \
+ && yum install-y moreutils
 
 # Define default config file in /etc/arkmanager
 COPY arkmanager-system.cfg /etc/arkmanager/arkmanager.cfg
