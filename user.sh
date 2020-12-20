@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Export environment variables
+declare -p | grep -Ev 'BASHOPTS|BASH_VERSINFO|EUID|PPID|SHELLOPTS|UID' > /container.env
+
 # Change the ARK_UID if needed
 if [ ! "$(id -u steam)" -eq "$ARK_UID" ]; then 
 	echo "Changing steam uid to $ARK_UID."
