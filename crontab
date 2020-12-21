@@ -1,5 +1,4 @@
 SHELL=/bin/bash
-BASH_ENV=/container.env
 # Example of job definition:
 # .---------------- minute (0 - 59) 
 # |  .------------- hour (0 - 23) 
@@ -18,6 +17,5 @@ BASH_ENV=/container.env
 # 10 2 * * * find /ark/backup -type f -mtime +7 -delete; find /ark/backup -type d -empty -delete
 # WARNING : the container timezone is maybe not your current timezone
 #           You can sync them with option -v /etc/localtime:/etc/localtime:ro or -e "TZ=UTC"
-0 * * * * arkmanager update --ifempty --update-mods | ts '[\%Y-\%m-\%d \%H:\%M:\%S][update]' >> /ark/log/crontab.log 2>&1
-*/10 * * * * arkmanager saveworld backup | ts '[\%Y-\%m-\%d \%H:\%M:\%S][backup]' >> /ark/log/crontab.log 2>&1
-0 6,18 * * * arkmanager restart --warn | ts '[\%Y-\%m-\%d \%H:\%M:\%S][restart]' >> /ark/log/crontab.log 2>&1
+0 * * * * . /container.env; arkmanager update --ifempty --update-mods | ts '[\%Y-\%m-\%d \%H:\%M:\%S][update]' >> /ark/log/crontab.log 2>&1
+*/10 * * * * . /container.env; arkmanager saveworld backup | ts '[\%Y-\%m-\%d \%H:\%M:\%S][backup]' >> /ark/log/crontab.log 2>&1
